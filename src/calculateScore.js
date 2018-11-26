@@ -1,11 +1,11 @@
-const recognizeSpareAndStrike = (state, [roll1, roll2 = 0]) => Object.create({
+const recognizeSpareAndStrike = (state, [roll1, roll2]) => Object.create({
 	score: state.score,
 	doubleUp: roll1 == 10 ?
 		2
 		: (roll1 + roll2 == 10) ? 1 : 0
 })
 
-const increaseScore = (state, by = 0) => Object.create({
+const increaseScore = (state, by) => Object.create({
 	score: state.score + by + (state.doubleUp > 0 ? by : 0),
 	doubleUp: (state.doubleUp > 0 ? state.doubleUp - 1 : 0)
 })

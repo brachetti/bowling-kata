@@ -1,60 +1,69 @@
 const validate = require('../src/validate')
+const { givenGame } = require('./util')
 
-const givenGame = (frames) =>
-	Object.create({
-		"frames": frames
+describe('validates', () => {
+	it('an empty game', () => {
+		const emptyGame = givenGame([])
+		expect(validate(emptyGame)).toBeTruthy()
 	})
 
-test('valid games', () => {
-	const emptyGame = givenGame([])
+	it('no score game', () => {
+		const noScore = givenGame([
+			[ 0, 0 ],
+			[ 0, 0 ],
+			[ 0, 0 ],
+			[ 0, 0 ],
+			[ 0, 0 ],
+			[ 0, 0 ],
+			[ 0, 0 ],
+		])
 
-	const noScore = givenGame([
-		[ 0, 0 ],
-		[ 0, 0 ],
-		[ 0, 0 ],
-		[ 0, 0 ],
-		[ 0, 0 ],
-		[ 0, 0 ],
-		[ 0, 0 ],
-	])
+		expect(validate(noScore)).toBeTruthy()
+	})
 
-	const badPlayer = givenGame([
-		[0 ,1]
-	])
+	it('a bad player', () => {
+		const badPlayer = givenGame([
+			[0 ,1]
+		])
 
-	const noSpecialCase = givenGame([
-		[1, 1],
-		[1, 1],
-		[1, 1],
-		[1, 1],
-		[1, 1], // 5
+		expect(validate(badPlayer)).toBeTruthy()
+	})
 
-		[1, 1],
-		[1, 1],
-		[1, 1],
-		[1, 1],
-		[1, 1], // 10
-	])
+	it('a typical long game', () => {
+		const noSpecialCase = givenGame([
+			[1, 1],
+			[1, 1],
+			[1, 1],
+			[1, 1],
+			[1, 1], // 5
 
-	const spareInTenthFrame = givenGame([
-		[1, 1],
-		[1, 1],
-		[1, 1],
-		[1, 1],
-		[1, 1], // 5
+			[1, 1],
+			[1, 1],
+			[1, 1],
+			[1, 1],
+			[1, 1], // 10
+		])
 
-		[1, 1],
-		[1, 1],
-		[1, 1],
-		[1, 1],
-		[2, 8, 3], // 10
-	])
+		expect(validate(noSpecialCase)).toBeTruthy()
+	})
 
-	expect(validate(emptyGame)).toBeTruthy()
-	expect(validate(noScore)).toBeTruthy()
-	expect(validate(badPlayer)).toBeTruthy()
-	expect(validate(noSpecialCase)).toBeTruthy()
-	expect(validate(spareInTenthFrame)).toBeTruthy()
+	it('a spare in the tenth frame', () => {
+		const spareInTenthFrame = givenGame([
+			[1, 1],
+			[1, 1],
+			[1, 1],
+			[1, 1],
+			[1, 1], // 5
+
+			[1, 1],
+			[1, 1],
+			[1, 1],
+			[1, 1],
+			[2, 8, 3], // 10
+		])
+
+		expect(validate(spareInTenthFrame)).toBeTruthy()
+	})
 })
 
 test('invalid games', () => {

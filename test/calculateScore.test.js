@@ -1,9 +1,5 @@
+const { givenGame } = require("./util")
 const calculateScore = require('../src/calculateScore')
-
-const givenGame = (frames) =>
-	Object.create({
-		"frames": frames
-	})
 
 test('simple cases', () => {
 	const emptyGame = givenGame([])

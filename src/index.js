@@ -1,9 +1,18 @@
 const calculation = require('./calculateScore')
 const validate = require('./validate')
 
-const calculateScore = (game) =>
-	validate(game) && calculation(game)
+class InvalidGameException extends Error {}
+
+const calculateScore = (game) => {
+	if (validate(game) == false) {
+		throw new InvalidGameException('invalid game')
+	}
+
+	return calculation(game)
+}
+
 
 module.exports = {
-	calculateScore
+	calculateScore,
+	InvalidGameException
 }
