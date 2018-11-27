@@ -1,7 +1,7 @@
 const validate = require('../src/validate')
 const { givenGame } = require('./util')
 
-describe('validates', () => {
+describe('successful validation of scenarios like', () => {
 	it('an empty game', () => {
 		const emptyGame = givenGame([])
 		expect(validate(emptyGame)).toBeTruthy()
