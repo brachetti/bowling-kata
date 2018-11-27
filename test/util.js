@@ -1,5 +1,3 @@
-const givenGame = (frames) => Object.create({
-	"frames": frames
-});
+const givenGame = (frames) => frames;
 
 exports.givenGame = givenGame;

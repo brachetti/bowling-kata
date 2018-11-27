@@ -1,6 +1,6 @@
-const validate = (game) => {
-	const onlyTenFrames = game.frames.length <= 10
-	const noErrorsHappened = game.frames.reduce(
+const validate = (frames) => {
+	const onlyTenFrames = frames.length <= 10
+	const noErrorsHappened = frames.reduce(
 		(noErrorsSoFar, frame, index) => noErrorsSoFar  && (
 			index != 9 ?
 			frame.length < 3

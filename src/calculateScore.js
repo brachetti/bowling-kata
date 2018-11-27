@@ -14,8 +14,8 @@ const increaseScoreForLastFrame = (state, by, lastFrame) => lastFrame ?
 	increaseScore(state, by) :
 	state
 
-const calculateScore = (game) => {
-	return game.frames.reduce(
+const calculateScore = (frames) => {
+	return frames.reduce(
 		(state, frame, index) => {
 			const [roll1, roll2 = 0, roll3 = 0] = frame
 			if (frame.length == 1) {
